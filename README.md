@@ -136,7 +136,6 @@ In the demo, the live model resisted the payload and reported both the `selfdest
 - **Ollama was cut for time.** Only Groq is implemented. The provider interface and factory are in place.
 - **Mempool reconnect is simple.** It makes one reconnect attempt per drop, restored after a successful resubscribe. Two drops in a row stop the watcher with a clear message.
 - **Mempool testing did not cover Alchemy.** A 5-minute live run on a public endpoint (the `newPendingTransactions` fallback path) survived a real network drop mid-run: it reconnected in 3 s and kept analyzing. Alchemy's full-object subscription was not tested live, since no Alchemy key was available.
-- **Ctrl+C was only checked indirectly.** Shutdown was verified by calling `stop()`, and the process exits about 300 ms after. A real SIGINT could not be sent from the test harness on Windows.
 - **`gas-price-outlier` is noisy** when base fees are low, since tips spike relative to the median. It is low weight on purpose.
 - **Cross-check regex is heuristic.**
   - Files under `@openzeppelin/` and similar paths are skipped for hard signals, because vendored libraries contain `delegatecall` and `pause` whether used or not. A deployer could abuse that by naming a malicious file to look vendored.
