@@ -131,11 +131,11 @@ In the demo, the live model resisted the payload and reported both the `selfdest
 
 ## Known limitations
 
-- **Etherscan may be unreachable from some networks.** It was blocked by TLS reset on the development network, so the `contract` command could not be verified live there. The response parser, unverified path, cache and backoff were tested against mocked responses. The demo falls back to a bundled WETH9 snapshot.
+- **Etherscan may be unreachable from some networks.** Some ISPs block it with a TLS reset. The `contract` command was verified live on another network: USDT audited end to end, and an unverified address reported cleanly. The demo falls back to a bundled WETH9 snapshot when Etherscan cannot be reached.
 - **No Llama 3 model.** The spec asked for a Llama 3 variant, but the Groq account used had none available, so the default is `openai/gpt-oss-120b`. Set `GROQ_MODEL` to change it.
 - **Ollama was cut for time.** Only Groq is implemented. The provider interface and factory are in place.
 - **Mempool reconnect is simple.** It makes one reconnect attempt per drop, restored after a successful resubscribe. Two drops in a row stop the watcher with a clear message.
-- **Mempool testing was partial.** Tested live for 60 s on a public endpoint (the `newPendingTransactions` fallback path), not on Alchemy's full-object subscription, since no Alchemy key was available.
+- **Mempool testing did not cover Alchemy.** A 5-minute live run on a public endpoint (the `newPendingTransactions` fallback path) survived a real network drop mid-run: it reconnected in 3 s and kept analyzing. Alchemy's full-object subscription was not tested live, since no Alchemy key was available.
 - **Ctrl+C was only checked indirectly.** Shutdown was verified by calling `stop()`, and the process exits about 300 ms after. A real SIGINT could not be sent from the test harness on Windows.
 - **`gas-price-outlier` is noisy** when base fees are low, since tips spike relative to the median. It is low weight on purpose.
 - **Cross-check regex is heuristic.**
