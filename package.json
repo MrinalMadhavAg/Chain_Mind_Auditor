@@ -1,0 +1,27 @@
+{
+  "name": "chain-mind-auditor",
+  "version": "0.1.0",
+  "description": "CLI that turns live Ethereum data into human-readable security analysis",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "tx": "tsx src/index.ts tx",
+    "contract": "tsx src/index.ts contract",
+    "demo": "tsx scripts/demo.ts"
+  },
+  "dependencies": {
+    "chalk": "^6.0.1",
+    "cli-table3": "^0.6.5",
+    "dotenv": "^18.0.5",
+    "ethers": "^6.17.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
